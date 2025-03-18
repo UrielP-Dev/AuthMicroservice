@@ -15,7 +15,6 @@ import java.util.Date;
 
 @Service
 public class UserService {
-
     @Autowired
     private UserRepository userRepository;
 
@@ -43,10 +42,7 @@ public class UserService {
 
         userRepository.save(newUser);
 
-        String token = jwtUtil.generateToken(newUser.getUsername(),
-                newUser.getRole().getLabel(),
-                newUser.getId(),
-                newUser.getCompany());
+        String token = jwtUtil.generateToken(newUser.getUsername(), newUser.getRole().getLabel());
         return new AuthResponse(token);
     }
 
@@ -58,10 +54,7 @@ public class UserService {
             throw new RuntimeException("Invalid credentials");
         }
 
-        String token = jwtUtil.generateToken(user.getUsername(),
-                user.getRole().getLabel(),
-                user.getId(),
-                user.getCompany());
+        String token = jwtUtil.generateToken(user.getUsername(), user.getRole().getLabel());
         return new AuthResponse(token);
     }
 
